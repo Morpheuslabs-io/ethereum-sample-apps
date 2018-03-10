@@ -1,4 +1,10 @@
 # Sample Smart Contracts
 The samples Ethereum smart contract applications and related DApps.
 
-The samples DApps may be modified from existing samples applications available in other repositories, such as GitHub. The sample applications can be used as Tutorial or a starting point for further prototyping.
+This repo is dedicated to our collection of samples DApps and smart contract related apps.  These application may have been modified from the original samples applications available in other repositories, to be used in Morpheus Labs BPaaS. The sample applications can be used as Tutorial or a starting point for further prototyping.
+
+
+# Our List of Sample applications
+
+ - Truffle-Webpack-Demo (MetaCoin) https://github.com/Morpheuslabs-io/ethereum-sample-apps/tree/master/truffle-webpack-demo
+ - Supply-chain-smart-contracts https://github.com/Morpheuslabs-io/ethereum-sample-apps/tree/master/supply-chain-smart-contracts
