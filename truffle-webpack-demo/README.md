@@ -1,4 +1,4 @@
-![Contribute](http://bpaas.morpheuslabs.io/dashboard/assets/branding/Automation_BPaas_Ws.png)
+[![Contribute](http://bpaas.morpheuslabs.io/dashboard/assets/branding/Automation_BPaas_Ws.png)](http://bpaas.morpheuslabs.io/f?id=factoryxfnee8kgo8ifj5gy)
 
 ## Sample Truffle + Webpack Demo App
 
