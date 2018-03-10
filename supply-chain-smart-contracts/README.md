@@ -1,57 +1,34 @@
-# supply-chain-smart-contracts
 
-### install test-rpc locally
-install [testrpc](https://github.com/ethereumjs/testrpc) as your local geth-rpc or use the Docker image - if you run into problems building the image on Windows, simply build it in the Ubuntu subsystem on Windows. Here a [description](https://blog.jayway.com/2017/04/19/running-docker-on-bash-on-windows/) how to use the windows docker daemon from within the Linux subsystem. 
+[![Contribute](http://bpaas.morpheuslabs.io/dashboard/assets/branding/Automation_BPaas_Ws.png)](http://bpaas.morpheuslabs.io/f?id=factorya617ioxtyp0hf4y2)
 
-### install geth locally 
-follow these [instructions to install geth](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
-
-### deploy geth as Ubuntu VM on Azure
-simply deploy the follwoing arm template:
-https://github.com/Azure/azure-quickstart-templates/tree/master/go-ethereum-on-ubuntu
-
-Once the resource has been deployed, create a VPN to ensure the VM is isn't publicly accessible. Add a the geth-rpc port 8545 as an inbound security rule to the Nnewtwork security group (in addition to ssh). Also allow outbound traffic on all ports (or the geth peer network port only (which is ????)) to ensure that geth can connect to it's peers.
-
-To create the VPN, it might be best to first deploy the [services](https://github.com/cloudbeatsch/supply-chain-services) and create the VPN including the gateway through the WebApp's Networking settings. This will allow to create a VPN which includes the vpn gateway.
+# Supply-chain-smart-contracts
 
 ## Dependencies
-
+All Dependencies are already provided within the stack
 ### truffle
-install [truffle](https://github.com/trufflesuite/truffle)
+The DEV machine come with node.js and truffle already preconfigured. The Web3 RPC location will be picked up from the truffle.js file.
 
-```
-sudo apt-get update && sudo apt-get -y upgrade
-sudo apt-get -y install curl git vim build-essential
+### Test using testrpc
+The RPC server come already preconfigured.
 
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo npm install -global express
+### Geth
+The Geth node server come already preconfigured in the stack.
 
-sudo npm install -global truffle
-```
 
-On Windows: before you install truffle ensure you install windows-build-tools
-```
-npm install -global --production windows-build-tools
-npm install -global truffle
-```
+##Running
+The Dev Machine and RPC are running as part of the stack into our cloud environment. The Web3 RPC location will be picked up from the truffle.js file.
 
-## Test using testrpc
-
-start test-rpc:
-```
-docker run -d -p 8545:8545 ethereumjs/testrpc:latest -a 10 -u0 -u1
-```
-or in attached mode to see the transactions:
-```
-docker run -p 8545:8545 ethereumjs/testrpc:latest -a 10 -u0 -u1
-```
+## Automation Steps
+The process will:
+ - clone this repo and checkout the branch
+ - activate the Dev machine and the RPC machine
+ - initialise the IDE and create the project supply-chain-smart-contracts
 
 ## Test in Testnet mode
 Ensure that the VM is accessible from a private network only. To ssh into it, a jumperBox vm can be used (a vm that acts which provides public ssh but is part of the VPN).
 
 Setup your Rinkeby Testnet by following this [article](https://gist.github.com/cryptogoth/10a98e8078cfd69f7ca892ddbdcf26bc)
-NOte: ensure that you start geth by enabling `rpc` and `web3`: 
+NOte: ensure that you start geth by enabling `rpc` and `web3`:
 
 ```
 geth ... --rpc --rpcport=8545 --rpcaddr=0.0.0.0 --rpcapi="personal,admin,eth,net,web3"
@@ -62,7 +39,7 @@ you can check the accessability of your `geth rpc` endpoint within your private 
 curl -X POST --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}' http://10.0.0.4:8545
 ```
 
-Before we can deploy the contract, geth needs to be fully synched with he the blockchain. We can check the progress through the console: 
+Before we can deploy the contract, geth needs to be fully synched with he the blockchain. We can check the progress through the console:
 
 ```
 > eth.syncing
@@ -74,7 +51,7 @@ Before we can deploy the contract, geth needs to be fully synched with he the bl
   startingBlock: 440322
 }
 ```
-Once we're finished with syncing `eth.blockNumber` returns a the number of the latest block. While syncing, it returns `0` 
+Once we're finished with syncing `eth.blockNumber` returns a the number of the latest block. While syncing, it returns `0`
 
 unlock your account:
 ```
@@ -87,7 +64,7 @@ in your `truffle.js` add a property for your network:
     testnet: {
       host: "10.0.0.4",
       port: 8545,
-      network_id: "4" 
+      network_id: "4"
     }
   }
 ```
@@ -138,4 +115,3 @@ In case of a successful execution, the process will be terminated with a success
 ```json
 {"accountAddress":"0x6290feb5d6155bb8ca4551bae08564afb636a974","contractAddress":"0x44D89F52f93D1bF9A0F47330B5726B0d82cD8176"}
 ```
-
